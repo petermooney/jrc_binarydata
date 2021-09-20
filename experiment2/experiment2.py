@@ -296,6 +296,7 @@ for i in range(0,20):
     print("File size is {} Kb".format(round(file_size/1024),2))
 
 
+print ("\n==== Statistical Report ====")
 
 pbf_geojson_timing_np = np.array(pbf_geojson_timing)
 json_pbf_timing_np = np.array(json_pbf_timing)
