@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package AddressFI;
+
+message Address_prop {
+  required string addrHousenumber = 1;
+  required string addrStreet = 2;
+  required string addrCity = 3;
+  required int32 fid = 4;
+  required string source = 5;
+  required string addrUnit = 6;
+  required string fullAddress = 7;
+  required string geometry = 8;
+}
+message Address {
+repeated Address_prop address = 1;
+}
