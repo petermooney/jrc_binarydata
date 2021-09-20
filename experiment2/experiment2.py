@@ -15,7 +15,7 @@ from fastavro.schema import load_schema
 
 import experiment2_pb2
 
-numFeatures = 20000
+numFeatures = 12345
 file_name = "52NorthLocations_{}".format(numFeatures)
 avro_schema_file_name = "experiment2"
 data_CRS = "epsg:4326"
@@ -37,7 +37,7 @@ if (CLEAN_FOLDERS == 1):
     for file in os.scandir(dir):
         os.remove(file.path)
 
-"""
+
 print ("Started downloading from API ")
 tic = time.perf_counter()
 response = json.loads(requests.get("https://jrc.dev.52north.org/v1.1/Locations?$skip={}&$top={}".format(numFeatures,numFeatures)).text)
@@ -50,7 +50,7 @@ with open('./response-data/{}.json'.format(file_name), 'w') as f:
 toc = time.perf_counter()
 print("Finished dumping JSON to file ...")
 print(f"\tTiming Information: Total:\n\tDownloaded response from API\n\tDump JSON to file\n\tTotal: {toc - tic:0.4f} seconds")
-"""
+
 
 ## Here we work directly with the JSON response file.
 file_size = os.path.getsize('./response-data/{}.json'.format(file_name))
