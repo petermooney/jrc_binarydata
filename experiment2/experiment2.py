@@ -15,8 +15,8 @@ from fastavro.schema import load_schema
 
 import experiment2_pb2
 
-numFeatures = 12345
-file_name = "52NorthLocations_{}".format(numFeatures)
+numFeatures = 10000
+file_name = "experiment2_{}".format(numFeatures)
 avro_schema_file_name = "experiment2"
 data_CRS = "epsg:4326"
 
