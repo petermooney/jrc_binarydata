@@ -1,0 +1,18 @@
+syntax = "proto2";
+
+package Experiment2Data;
+
+message Experiment2_prop {
+  required string name = 1;
+  required float latitude = 2;
+  required float longitude = 3;
+  required string iotid = 4;
+  required string iotselfLink = 5;
+  required string description = 6;
+  required string historicalLink = 7;
+  required string thingsLink = 8;
+
+}
+message Experiment2Locations {
+repeated Experiment2_prop experiment2 = 1;
+}

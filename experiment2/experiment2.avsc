@@ -1,0 +1,17 @@
+{
+    "name": "Experiment2",
+    "namespace": "Experiment2STA",
+    "type": "record",
+    "fields": [
+
+        {"name": "name", "type": "string"},
+        {"name": "iotid", "type": "string"},
+        {"name": "description", "type": "string"},
+        {"name": "iotselfLink", "type": "string"},
+        {"name": "things_iot_navigationLink", "type": "string"},
+        {"name": "historical_locations_iot_navigationLink", "type": "string"},
+        {"name": "longitude", "type": "float"},
+        {"name": "latitude", "type": "float"}
+
+    ]
+}
