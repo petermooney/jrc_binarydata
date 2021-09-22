@@ -1,5 +1,5 @@
 ## This is the readme file for Experiment 1 and Experiment 2
-The Python code contained here was originally written in Python 3.8.10 on Ubuntu 20.04.3 LTS (focal) x86_64 (640 bit). The laptop computer was a DELL Inspiron 5567 with 16Gb memory and Intel Core(TM) i7-7500U CPU @ 2.70G processor. 
+The Python code contained here was originally written in Python 3.8.10 on Ubuntu 20.04.3 LTS (focal) x86_64 (64 bit). The laptop computer was a DELL Inspiron 5567 with 16Gb memory and Intel Core(TM) i7-7500U CPU @ 2.70G processor. 
 
 ### Required libraries and code.
 To reproduce and replicate the experiments outlined here in this repository you will need to install a number of libraries within Python.
