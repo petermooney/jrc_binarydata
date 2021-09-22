@@ -16,7 +16,11 @@ import numpy as np
 getcontext().prec = 16
 file_name = "experiment1"
 avro_schema_file_name = "address"
+#INPUT_GPKG_FILE = '/home/peter/Documents/raw-osm-data/Alessandro/FI_Addresses_Sample_Aug23rd2021.gpkg'
+INPUT_GPKG_FILE = 'test-geopackage.gpkg'
+#INPUT_GPKG_FILE_LAYER = 'FI_Addresses_Sample_Aug23rd2021'
 
+INPUT_GPKG_FILE_LAYER = 'test-geopackage'
 
 geopkg_geojson_timing = []
 geojson_pbf_timing = []
@@ -25,7 +29,7 @@ avro_geojson_timing = []
 pbf_geojson_timing = []
 load_geojson_timing = []
 
-for test in range (0,2):
+for test in range (0,5):
 
     ## Read the GeoPackage using GeoPandas and convert to GeoJSON file.
 
@@ -33,10 +37,10 @@ for test in range (0,2):
     print ("===========GeoPackage to GeoJSON==============")
     print ("Begin: Converting GeoPackage to GeoJSON...")
 
-    file_size = os.path.getsize('/home/peter/Documents/raw-osm-data/Alessandro/FI_Addresses_Sample_Aug23rd2021.gpkg')
+    file_size = os.path.getsize(INPUT_GPKG_FILE)
     print("GeoPackge File size is {} Kb".format(round(file_size/1024),2))
 
-    finland_gdf = gpd.read_file("/home/peter/Documents/raw-osm-data/Alessandro/FI_Addresses_Sample_Aug23rd2021.gpkg", layer='FI_Addresses_Sample_Aug23rd2021')
+    finland_gdf = gpd.read_file(INPUT_GPKG_FILE, layer=INPUT_GPKG_FILE_LAYER)
     finland_gdf.to_file("./geojson-output/{}.geojson".format(file_name), driver='GeoJSON')
     print ("End: Converting GeoPackage to GeoJSON...")
     toc = time.perf_counter()
@@ -53,7 +57,7 @@ for test in range (0,2):
     ## This is important if the CRS is not WGS 84 (EPSG:4326).
     ## Without the CRS specified, a GIS such as QGIS cannot render the GeoJSON file correctly.
     data_CRS = geojson_data.crs
-
+    print ("Data CRS {}".format(data_CRS))
 
     toc = time.perf_counter()
 
@@ -277,7 +281,7 @@ for test in range (0,2):
     file_size = os.path.getsize('./geojson-output/{}-avro_fast.geojson'.format(file_name))
     print("File size is {} Kb".format(round(file_size/1024),2))
 
-print ("\n==== Statistical Report ====")
+print ("\n\n\n==== Statistical Report ====")
 pbf_geojson_timing_np = np.array(pbf_geojson_timing)
 geojson_pbf_timing_np = np.array(geojson_pbf_timing)
 geojson_avro_timing_np = np.array(geojson_avro_timing)
@@ -285,10 +289,32 @@ avro_geojson_timing_np = np.array(avro_geojson_timing)
 geopkg_geojson_timing_np  = np.array(geopkg_geojson_timing)
 load_geojson_timing_np  = np.array(load_geojson_timing)
 
-print("Load GeoJSON mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(load_geojson_timing_np, dtype=np.float64),np.std(load_geojson_timing_np, dtype=np.float64)))
+print ("=====File Sizes=====")
+
+file_size = os.path.getsize(INPUT_GPKG_FILE)
+print("Input GPKG file size is {} Kb".format(round(file_size/1024),2))
+
+file_size = os.path.getsize('./geojson-output/{}.geojson'.format(file_name))
+print("./geojson-output/{}.geojson size is {} Kb".format(file_name,round(file_size/1024),2))
+
+file_size = os.path.getsize('./geojson-output/{}-pbf.geojson'.format(file_name))
+print("./geojson-output/{}-pbf.geojson size is {} Kb".format(file_name,round(file_size/1024),2))
+
+file_size = os.path.getsize('./geojson-output/{}-avro_fast.geojson'.format(file_name))
+print("./geojson-output/{}-avro_fast.geojson size is {} Kb".format(file_name,round(file_size/1024),2))
+
+file_size = os.path.getsize('./binary-output/{}.pbf'.format(file_name))
+print("./geojson-output/{}.pbf size is {} Kb".format(file_name,round(file_size/1024),2))
+
+file_size = os.path.getsize('./binary-output/{}_fast.avro'.format(file_name))
+print("./geojson-output/{}_fast.avro size is {} Kb".format(file_name,round(file_size/1024),2))
+
+print ("=====Run Times=====")
 print("Convert GPKG -> GeoJSON mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(geopkg_geojson_timing_np, dtype=np.float64),np.std(geopkg_geojson_timing_np, dtype=np.float64)))
 
-print("GeoJSON->Avro mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(geojson_avro_timing_np, dtype=np.float64),np.std(geojson_avro_timing_np, dtype=np.float64)))
-print("GeoJSON->PBF mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(geojson_pbf_timing_np, dtype=np.float64),np.std(geojson_pbf_timing_np, dtype=np.float64)))
-print("Avro->GeoJSON mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(avro_geojson_timing_np, dtype=np.float64),np.std(avro_geojson_timing_np, dtype=np.float64)))
-print("PBF->GeoJSON mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(pbf_geojson_timing_np,dtype=np.float64),np.std(pbf_geojson_timing_np,dtype=np.float64)))
+print("Load GeoJSON mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(load_geojson_timing_np, dtype=np.float64),np.std(load_geojson_timing_np, dtype=np.float64)))
+
+print("Serialize: GeoJSON->Avro mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(geojson_avro_timing_np, dtype=np.float64),np.std(geojson_avro_timing_np, dtype=np.float64)))
+print("Serialize: GeoJSON->PBF mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(geojson_pbf_timing_np, dtype=np.float64),np.std(geojson_pbf_timing_np, dtype=np.float64)))
+print("Deserialize: Avro->GeoJSON mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(avro_geojson_timing_np, dtype=np.float64),np.std(avro_geojson_timing_np, dtype=np.float64)))
+print("Deserialize: PBF->GeoJSON mean {:0.3f}s, std-dev {:0.4f}s".format(np.mean(pbf_geojson_timing_np,dtype=np.float64),np.std(pbf_geojson_timing_np,dtype=np.float64)))
