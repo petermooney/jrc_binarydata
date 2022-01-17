@@ -29,7 +29,7 @@ avro_geojson_timing = []
 pbf_geojson_timing = []
 load_geojson_timing = []
 
-for test in range (0,5):
+for test in range (0,1):
 
     ## Read the GeoPackage using GeoPandas and convert to GeoJSON file.
 
@@ -259,6 +259,9 @@ for test in range (0,5):
             #print (">> {},{}".format(Decimal(s[0].x),Decimal(s[0].y)))
             # rounded to 6 decimal places by default (GeoJSON package documentation)
             ## precision 10 seems to be the maximum allowed.
+
+            z = '{:<018}'
+
             geocoord_read = Point((float(s[0].x),float(s[0].y)),precision=10)
             geoJSON_Features_read.append(Feature(geometry=geocoord_read, properties=response_properties))
 

@@ -65,7 +65,7 @@ avro_geojson_timing = []
 json_geojson_timing = []
 
 
-for i in range(0,20):
+for i in range(0,10):
 
     print ("========= GeoJSON ===========")
     print ("Searialize JSON to GeoJSON ")
@@ -138,8 +138,8 @@ for i in range(0,20):
             tempExp2FastAvro["name"] = name
             tempExp2FastAvro["iotid"] = localID
             tempExp2FastAvro["description"] = description
-            tempExp2FastAvro["iotselfLink"] = thingsNavigation
-            tempExp2FastAvro["things_iot_navigationLink"] = iot_selfLink
+            tempExp2FastAvro["iotselfLink"] =  iot_selfLink
+            tempExp2FastAvro["things_iot_navigationLink"] = thingsNavigation
             tempExp2FastAvro["historical_locations_iot_navigationLink"] = historicalLocations
             tempExp2FastAvro["longitude"] = float(longitude)
             tempExp2FastAvro["latitude"] = float(latitude)
@@ -296,7 +296,30 @@ for i in range(0,20):
     print("File size is {} Kb".format(round(file_size/1024),2))
 
 
-print ("\n==== Statistical Report ====")
+print ("\n\n\n==== Statistical Report ====")
+print ("=====File Sizes=====")
+
+file_size = os.path.getsize('./response-data/{}.json'.format(file_name))
+print("./response-data/{}.json size is {} Kb".format(file_name,round(file_size/1024),2))
+
+file_size = os.path.getsize('./geojson-output/{}.geojson'.format(file_name))
+print("./geojson-output/{}.geojson size is {} Kb".format(file_name,round(file_size/1024),2))
+
+
+file_size = os.path.getsize('./geojson-output/{}-pbf.geojson'.format(file_name))
+print("./geojson-output/{}-pbf.geojson size is {} Kb".format(file_name,round(file_size/1024),2))
+
+file_size = os.path.getsize('./geojson-output/{}-avro_fast.geojson'.format(file_name))
+print("./geojson-output/{}-avro_fast.geojson size is {} Kb".format(file_name,round(file_size/1024),2))
+
+file_size = os.path.getsize('./binary-output/{}.pbf'.format(file_name))
+print("./geojson-output/{}.pbf size is {} Kb".format(file_name,round(file_size/1024),2))
+
+file_size = os.path.getsize('./binary-output/{}_fast.avro'.format(file_name))
+print("./geojson-output/{}_fast.avro size is {} Kb".format(file_name,round(file_size/1024),2))
+
+
+print ("=====Run Times=====")
 
 pbf_geojson_timing_np = np.array(pbf_geojson_timing)
 json_pbf_timing_np = np.array(json_pbf_timing)

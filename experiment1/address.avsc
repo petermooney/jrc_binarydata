@@ -3,7 +3,6 @@
     "namespace": "FI_Addresses",
     "type": "record",
     "fields": [
-
         {"name": "addrHousenumber", "type": ["string","null"]},
         {"name": "addrStreet", "type": ["string","null"]},
         {"name": "addrCity", "type": ["string","null"]},
@@ -12,6 +11,5 @@
         {"name": "addrUnit", "type": ["string","null"]},
         {"name": "fullAddress", "type": ["string","null"]},
         {"name": "geometry", "type": ["string","null"]}
-
     ]
 }
