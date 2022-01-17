@@ -16,9 +16,7 @@ import numpy as np
 getcontext().prec = 16
 file_name = "experiment1"
 avro_schema_file_name = "address"
-#INPUT_GPKG_FILE = '/home/peter/Documents/raw-osm-data/Alessandro/FI_Addresses_Sample_Aug23rd2021.gpkg'
 INPUT_GPKG_FILE = 'test-geopackage.gpkg'
-#INPUT_GPKG_FILE_LAYER = 'FI_Addresses_Sample_Aug23rd2021'
 
 INPUT_GPKG_FILE_LAYER = 'test-geopackage'
 
